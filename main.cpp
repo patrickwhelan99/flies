@@ -165,6 +165,10 @@ int main()
     generationText.setFont(font);
 
 
+    std::clock_t start = std::clock();
+    double duration;
+
+
     while (app.isOpen())
     {
 
@@ -176,8 +180,16 @@ int main()
                 app.close();
         }
 
+        duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+
+        if(duration < .005)
+            continue;
+
 
         update(app, windowSize, bg, goal, flies, rng, dist, moveNum, generation, generationText);
+
+        start = std::clock();
+
     }
 
     return EXIT_SUCCESS;
